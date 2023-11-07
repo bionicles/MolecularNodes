@@ -19,6 +19,7 @@ website:
       - installation.md
       - section: Tutorials
         contents: tutorials/*
+      - importing.qmd
       - examples.md
       - nodes.qmd
       - section: Scripting

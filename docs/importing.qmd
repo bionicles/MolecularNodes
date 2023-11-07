@@ -1,0 +1,36 @@
+---
+title: "Importing"
+number-sections: true
+number-depth: 3
+---
+
+## PDB File
+
+To download from the PDB, all that is required is the 4-character PDB code.
+
+Input the PDB code, then click <kdb>Download</kbd>. Molecular Nodes will download and import 
+the structure into Blender. A starting node tree based on the selected `Style` will be created.
+
+![Downloading a structure from the PDB.](https://imgur.com/kCXy4LK.mp4)
+
+## Local File
+
+A structure from your computer can be opened win thte `Local File` tab. You can choose a starting style and the name of the molecule when imported.
+
+![](https://imgur.com/MSxe1gH.mp4)
+
+## CellPack
+
+To import a CellPack dataset, you can use a `.cif` of `.bcif` formatted file.
+
+Molecular Nodes will import each of the individual structures contained in the file, into their own collection inside of the `MN_data` collection.
+
+The instanced structure will be created, which will use the import structures and the underlying instancing information to recreate the overall structure.
+
+![](https://imgur.com/UPPBKWN.mp4)
+
+The imported model will initial display as a point cloud. This is for performance reasons, as the fully instanced model can be very slow on some computers, with the potential to crash Blender. You can untick the `As Points` option to change it over to the instances of the atomic chains.
+
+The `Fraction` input what proption of the instances are shown. Again this can be used for performance reasons, to reduce the number of instances shown until render time when all are shown.
+
+![](https://imgur.com/ElKyqsT.mp4)
