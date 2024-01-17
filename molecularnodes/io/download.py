@@ -2,9 +2,10 @@ import os
 import requests
 import io
 
-def fetch(code, format="cif", cache=None, database='rcsb'):
+
+def fetch(code, format="cif", database='rcsb', cache=None):
     """
-    Downloads a structure from the specified protein data bank in the given format.
+    Downloads a structure from the specified databse in the given format.
 
     Parameters
     ----------
@@ -12,7 +13,7 @@ def fetch(code, format="cif", cache=None, database='rcsb'):
         The code of the file to fetch.
     format : str, optional
         The format of the file. Defaults to "cif". Possible values are ['cif', 'pdb', 
-        'mmcif', 'pdbx', 'mmtf', 'bcif'].
+        'mmcif', 'pdbx', 'mmtf', 'bcif', 'sdf'].
     cache : str, optional
         The cache directory to store the fetched file. Defaults to None.
     database : str, optional
@@ -28,9 +29,10 @@ def fetch(code, format="cif", cache=None, database='rcsb'):
     ValueError
         If the specified format is not supported.
     """
-    supported_formats = ['cif', 'pdb', 'mmtf', 'bcif']
+    supported_formats = ['cif', 'pdb', 'mmtf', 'bcif', 'sdf']
     if format not in supported_formats:
-        raise ValueError(f"File format '{format}' not in: {supported_formats=}")
+        raise ValueError(
+            f"File format '{format}' not in: {supported_formats=}")
 
     _is_binary = (format in ['bcif', 'mmtf'])
     filename = f"{code}.{format}"
@@ -62,19 +64,21 @@ def fetch(code, format="cif", cache=None, database='rcsb'):
 
     return file
 
+
 def _url(code, format, database="rcsb"):
     "Get the URL for downloading the given file form a particular database."
-    
+
     if database == "rcsb":
         if format == "bcif":
             return f"https://models.rcsb.org/{code}.bcif"
-        if format == "mmtf":
+        elif format == "mmtf":
             return f"https://mmtf.rcsb.org/v1.0/full/{code}"
-            
+
         else:
             return f"https://files.rcsb.org/download/{code}.{format}"
+    elif database == 'pubchem':
+        return f"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{code}/record/{format}"
     # if database == "pdbe":
     #     return f"https://www.ebi.ac.uk/pdbe/entry-files/download/{filename}"
     else:
         ValueError(f"Database {database} not currently supported.")
-
