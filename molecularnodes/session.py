@@ -116,7 +116,14 @@ class MNSession:
         for uuid, item in session.items():
             item.object = bpy.data.objects[item.name]
             if hasattr(item, "frames") and hasattr(item, "frames_name"):
-                item.frames = bpy.data.collections[item.frames_name]
+                if item.frames_name == "":
+                    continue
+                frames = bpy.data.collections.get(item.frames_name)
+                if frames is None:
+                    raise Warning(
+                        f"No collection found for {item} with it collection {item.frames_name}"
+                    )
+                item.frames = frames
 
         for uuid, mol in session.molecules.items():
             self.molecules[uuid] = mol
