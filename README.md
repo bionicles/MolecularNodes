@@ -39,7 +39,7 @@ Once happy with your code, open a pull request to discuss and get it reviewed by
 
 ## Citation
 
-A paper has not yet been published on the addon, but if you use it in your academic work you can site it from Zenodo:
+A paper has not yet been published on the addon, but if you use it in your academic work you can cite it from Zenodo:
 
 [![](https://zenodo.org/badge/485261976.svg)](https://zenodo.org/badge/latestdoi/485261976)
 
